@@ -14,5 +14,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('posts');
 });
+
+Route::get('post/{postSlug}', function($postSlug) {
+    $path = __DIR__ . '/../resources/posts/' . $postSlug . '.html';
+
+    if (! file_exists($path)) {
+        return redirect('/');
+    }
+
+    $post = file_get_contents($path);
+
+
+
+    return view('post', [
+        'post' => $post
+    ]);
+})->where('postSlug', '[A-z\-]+');
