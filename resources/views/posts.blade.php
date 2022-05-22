@@ -3,14 +3,9 @@
 <title>My Blog</title>
 
 <body>
+    <?php foreach($posts as $postContent): ?>
     <article>
-        <h1><a href="/post/first-post">My first post</a></h1>
-        <p>first post content</p>
+        <?= $postContent; ?>
     </article>
-    <article>
-        <h1><a href="/post/second-post">My second post</a></h1>
-    </article>
-    <article>
-        <h1><a href="/post/third-post">My third post</a></h1>
-    </article>
+    <?php endforeach; ?>
 </body>
