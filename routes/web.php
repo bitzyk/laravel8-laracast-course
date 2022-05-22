@@ -18,15 +18,17 @@ Route::get('/', function () {
 });
 
 Route::get('post/{postSlug}', function($postSlug) {
+    // find a post by its slug and pass it to a view called "post"
     $path = __DIR__ . '/../resources/posts/' . $postSlug . '.html';
 
     if (! file_exists($path)) {
         return redirect('/');
     }
-
-    $post = file_get_contents($path);
-
-
+    $post = cache()->remember(
+        "post.{$postSlug}",
+        now()->addMinutes(30), // cache for 30 minutes
+        fn() => file_get_contents($path)
+    );
 
     return view('post', [
         'post' => $post
