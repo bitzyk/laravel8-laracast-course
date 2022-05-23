@@ -1,14 +1,8 @@
-<!doctype html>
-
-<title>My Blog</title>
-
-<body>
-
+<x-layout>
 <h1>
-    <?= /** @var \App\Models\Post $post */
-    $post->getTitle(); ?>
+    <?php /** @var \App\Models\Post $post */ ?>
+    {!! $post->getTitle() !!}
 </h1>
 
-<?= $post->getContent(); ?>
-
-</body>
+{!! $post->getContent() !!}
+</x-layout>

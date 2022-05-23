@@ -81,16 +81,21 @@ class Post
      */
     public static function all()
     {
-        return  collect(File::files(resource_path() . '/posts'))
-            ->map(fn($splfFileInfo) => YamlFrontMatter::parseFile($splfFileInfo))
-            ->map(fn(Document $frontMatterDocument): Post => new Post(
-                $frontMatterDocument->title,
-                $frontMatterDocument->slug,
-                $frontMatterDocument->excerpt,
-                $frontMatterDocument->date,
-                $frontMatterDocument->body()
-            ))
-        ;
+        return  cache()->rememberForever(
+            'posts.all',
+            function () {
+                return collect(File::files(resource_path() . '/posts'))
+                    ->map(fn($splfFileInfo) => YamlFrontMatter::parseFile($splfFileInfo))
+                    ->map(fn(Document $frontMatterDocument): Post => new Post(
+                        $frontMatterDocument->title,
+                        $frontMatterDocument->slug,
+                        $frontMatterDocument->excerpt,
+                        $frontMatterDocument->date,
+                        $frontMatterDocument->body()
+                    ))
+                    ->sortByDesc(fn(Post $post) => $post->getDate());
+            }
+        );
     }
 
     /**
