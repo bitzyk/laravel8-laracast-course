@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
         Post::truncate();
 
         // user seeds
-         $user = \App\Models\User::factory()->create();
+         $user1 = \App\Models\User::factory()->create();
+         $user2 = \App\Models\User::factory()->create();
 
          // category seeds
          $workCategory = Category::create([
@@ -43,7 +44,7 @@ class DatabaseSeeder extends Seeder
         $posts = [
             [
                 'category_id' => $workCategory->id,
-                'user_id' => $user->id,
+                'user_id' => $user1->id,
                 'title' => 'My first post',
                 'slug' => 'first-post',
                 'excerpt' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
@@ -52,7 +53,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'category_id' => $hobbyCategory->id,
-                'user_id' => $user->id,
+                'user_id' => $user2->id,
                 'title' => 'My second post',
                 'slug' => 'second-post',
                 'excerpt' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
@@ -61,7 +62,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'category_id' => $hobbyCategory->id,
-                'user_id' => $user->id,
+                'user_id' => $user1->id,
                 'title' => 'My third post',
                 'slug' => 'third-post',
                 'excerpt' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
@@ -70,7 +71,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'category_id' => $skiCategory->id,
-                'user_id' => $user->id,
+                'user_id' => $user2->id,
                 'title' => 'My fourth post',
                 'slug' => 'fourth-post',
                 'excerpt' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',

@@ -1,6 +1,6 @@
 <div>
     Category:
-    <a href="/posts-category/{{ $post->category->slug }}">
-        {{ $post->category->name }}
+    <a href="/posts-category/{{ $category->slug }}">
+        {{ $category->name }}
     </a>
 </div>

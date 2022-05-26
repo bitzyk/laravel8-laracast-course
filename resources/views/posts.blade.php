@@ -10,7 +10,8 @@
             <div>
                 <a href="/post-by-id/{{ $post->id }}">post route by id</a>
             </div>
-            <x-category-breadcrumb :post="$post"></x-category-breadcrumb>
+            <x-category-breadcrumb :category="$post->category"></x-category-breadcrumb>
+            <x-user-breadcrumb :user="$post->user"></x-user-breadcrumb>
         </article>
     @endforeach
 </x-layout>

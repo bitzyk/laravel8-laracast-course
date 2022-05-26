@@ -3,7 +3,8 @@
         <?php /** @var \App\Models\Post $post */ ?>
         {!! $post->title !!}
     </h1>
-    <x-category-breadcrumb :post="$post"></x-category-breadcrumb>
+    <x-category-breadcrumb :category="$post->category"></x-category-breadcrumb>
+    <x-user-breadcrumb :user="$post->user"></x-user-breadcrumb>
 
     {!! $post->body !!}
 </x-layout>

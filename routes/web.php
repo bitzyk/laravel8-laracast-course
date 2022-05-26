@@ -20,7 +20,10 @@ Route::get('/', function () {
     });
 
     return view('posts', [
-        'posts' => \App\Models\Post::with('category')->get()
+        'posts' => \App\Models\Post::with([
+            'category',
+            'user',
+        ])->get()
     ]);
 });
 
