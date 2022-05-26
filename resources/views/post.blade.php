@@ -1,8 +1,8 @@
 <x-layout>
 <h1>
     <?php /** @var \App\Models\Post $post */ ?>
-    {!! $post->getTitle() !!}
+    {!! $post->title !!}
 </h1>
 
-{!! $post->getContent() !!}
+{!! $post->body !!}
 </x-layout>
