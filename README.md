@@ -10,7 +10,15 @@ php artisan make:model Category -m
 ```
 php artisan migrate:fresh
 ```
+- migrate & seed
+```
+php artisan migrate:fresh --seed
+```
 - shell into tinker
 ```
 php artisan tinker
+```
+- Seed databse
+```
+php artisan db:seed
 ```
