@@ -37,4 +37,11 @@ Route::get('post-by-id/{post}', function(\App\Models\Post $post) {
     return view('post', [
         'post' => $post
     ]);
-})->where('post', '[1-9]+');
+})->where('post:slug', '[1-9]+');
+
+
+Route::get('posts-category/{category:slug}', function(\App\Models\Category $category) {
+    return view('posts', [
+        'posts' => $category->posts
+    ]);
+})->where('category:slug', '[A-z\-]+');
