@@ -14,8 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+
+    \Illuminate\Support\Facades\DB::listen(function ($query) {
+        logger($query->sql);
+    });
+
     return view('posts', [
-        'posts' => \App\Models\Post::all()
+        'posts' => \App\Models\Post::with('category')->get()
     ]);
 });
 
