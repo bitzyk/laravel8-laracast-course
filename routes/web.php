@@ -19,9 +19,12 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('post/{postSlug}', function($postSlug) {
+/**
+ * route model binding -> {post} should be the same with \App\Models\Post
+ */
+Route::get('post/{post}', function(\App\Models\Post $post) {
     // find a post by its slug and pass it to a view called "post"
     return view('post', [
-        'post' => \App\Models\Post::find($postSlug)
+        'post' => $post
     ]);
 })->where('postSlug', '[A-z1-9\-]+');
