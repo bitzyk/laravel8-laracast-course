@@ -22,15 +22,21 @@ class DatabaseSeeder extends Seeder
         Category::truncate();
         Post::truncate();
 
-        // fake data from factory less the name column
-        $user = User::factory()->create([
-            'name' => 'Bitoi Cristian'
-        ]);
-
         // overide user_id from post factory
-        Post::factory(10)->create([
-            'user_id' => $user->id,
-        ]);
+        Post::factory(10)->create();
+
+//        // fake data from factory less the name column
+//        $user = User::factory()->create([
+//            'name' => 'Bitoi Cristian'
+//        ]);
+//
+//
+//        // overide user_id from post factory
+//        Post::factory(10)->create([
+//            'user_id' => $user->id,
+//        ]);
+
+
 
 //        // user seeds
 //         $user1 = \App\Models\User::factory()->create();

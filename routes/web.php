@@ -20,9 +20,9 @@ Route::get('/', function () {
     });
 
     return view('posts', [
-        'posts' => \App\Models\Post::with([
+        'posts' => \App\Models\Post::latest('published_at')->with([
             'category',
-            'user',
+            'author',
         ])->get()
     ]);
 });
@@ -53,3 +53,9 @@ Route::get('posts-category/{category:slug}', function(\App\Models\Category $cate
         'posts' => $category->posts
     ]);
 })->where('category:slug', '[A-z\-]+');
+
+Route::get('posts-user/{user:username}', function(\App\Models\User $user) {
+    return view('posts', [
+        'posts' => $user->posts
+    ]);
+});
