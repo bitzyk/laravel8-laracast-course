@@ -6,6 +6,10 @@ Php artisan most used commands:
 ```
 php artisan make:model Category -m
 ```
+- create a factory for model
+```
+php artisan make:factory PostFactory
+```
 - drop all tables and re-run all migrations
 ```
 php artisan migrate:fresh
