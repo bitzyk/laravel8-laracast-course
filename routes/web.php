@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-    \Illuminate\Support\Facades\DB::listen(function ($query) {
-        logger($query->sql);
-    });
+//    \Illuminate\Support\Facades\DB::listen(function ($query) {
+//        logger($query->sql);
+//    });
 
     return view('posts', [
         'posts' => \App\Models\Post::latest('published_at')->with([
@@ -50,12 +50,12 @@ Route::get('post-by-id/{post}', function(\App\Models\Post $post) {
 
 Route::get('posts-category/{category:slug}', function(\App\Models\Category $category) {
     return view('posts', [
-        'posts' => $category->posts
+        'posts' => $category->posts->load(['category', 'author'])
     ]);
 })->where('category:slug', '[A-z\-]+');
 
 Route::get('posts-user/{user:username}', function(\App\Models\User $user) {
     return view('posts', [
-        'posts' => $user->posts
+        'posts' => $user->posts->load(['category', 'author'])
     ]);
 });

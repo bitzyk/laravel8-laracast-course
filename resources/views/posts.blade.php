@@ -1,17 +1,11 @@
 <x-layout>
-    @foreach($posts as $post)
-        <article class="{{ $loop->even ? 'even' : '' }}">
-            <h1>
-                <a href="/post/{{ $post->slug }}">
-                    {{ $post->title }}
-                </a>
-            </h1>
-            <p>{{ $post->excerpt }}</p>
-            <div>
-                <a href="/post-by-id/{{ $post->id }}">post route by id</a>
-            </div>
-            <x-category-breadcrumb :category="$post->category"></x-category-breadcrumb>
-            <x-user-breadcrumb :author="$post->author"></x-user-breadcrumb>
-        </article>
-    @endforeach
+    @include('_posts-header')
+
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+        @if($posts->count())
+            <x-post-grid :posts="$posts" />
+        @else>
+            <p class="text-center">No posts yet. Please check later</p>
+        @endif
+    </main>
 </x-layout>
