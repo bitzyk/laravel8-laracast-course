@@ -23,7 +23,8 @@ Route::get('/', function () {
         'posts' => \App\Models\Post::latest('published_at')->with([
             'category',
             'author',
-        ])->get()
+        ])->get(),
+        'categories' => \App\Models\Category::all()
     ]);
 });
 
@@ -37,25 +38,18 @@ Route::get('post/{post:slug}', function(\App\Models\Post $post) {
     ]);
 })->where('post', '[A-z\-]+');
 
-/**
- * route model binding -> {post} should be the same with $post
- */
-Route::get('post-by-id/{post}', function(\App\Models\Post $post) {
-    // find a post by its slug and pass it to a view called "post"
-    return view('post', [
-        'post' => $post
-    ]);
-})->where('post:slug', '[1-9]+');
-
 
 Route::get('posts-category/{category:slug}', function(\App\Models\Category $category) {
     return view('posts', [
-        'posts' => $category->posts->load(['category', 'author'])
+        'posts' => $category->posts->load(['category', 'author']),
+        'categories' => \App\Models\Category::all(),
+        'currentCategory' => $category,
     ]);
 })->where('category:slug', '[A-z\-]+');
 
 Route::get('posts-user/{user:username}', function(\App\Models\User $user) {
     return view('posts', [
-        'posts' => $user->posts->load(['category', 'author'])
+        'posts' => $user->posts->load(['category', 'author']),
+        'categories' => \App\Models\Category::all(),
     ]);
 });
