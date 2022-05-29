@@ -26,3 +26,6 @@ php artisan tinker
 ```
 php artisan db:seed
 ```
+
+- PHP laravel plugin support generate -> https://github.com/barryvdh/laravel-ide-helper
+

@@ -23,10 +23,8 @@
                 </div>
             </header>
 
-            <div class="text-sm mt-2">
-                <p>
-                    {{ $post->excerpt }}
-                </p>
+            <div class="text-sm mt-2 space-y-4">
+                {!! $post->excerpt !!}
             </div>
 
             <x-user-breadcrumb :author="$post->author"></x-user-breadcrumb>
