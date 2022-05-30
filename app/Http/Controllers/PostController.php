@@ -13,10 +13,14 @@ class PostController extends Controller
 //        });
 
         return view('posts', [
-            'posts' => \App\Models\Post::latest('published_at')->with([
-                'category',
-                'author',
-            ])->get(),
+            'posts' =>
+                \App\Models\Post::latest('published_at')
+                ->filter(\request(['search']))
+                ->with([
+                    'category',
+                    'author',
+                ])
+                ->get(),
             'categories' => \App\Models\Category::all()
         ]);
     }
