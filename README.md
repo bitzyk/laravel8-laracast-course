@@ -26,6 +26,10 @@ php artisan tinker
 ```
 php artisan db:seed
 ```
+- Create a new controller
+```
+php artisan make:controller PostController
+```
 
 - PHP laravel plugin support generate -> https://github.com/barryvdh/laravel-ide-helper
 

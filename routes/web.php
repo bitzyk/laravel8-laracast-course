@@ -13,30 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-
-//    \Illuminate\Support\Facades\DB::listen(function ($query) {
-//        logger($query->sql);
-//    });
-
-    return view('posts', [
-        'posts' => \App\Models\Post::latest('published_at')->with([
-            'category',
-            'author',
-        ])->get(),
-        'categories' => \App\Models\Category::all()
-    ]);
-});
-
-/**
- * route model binding by a field that is not id -> {post} should be the same with $post
- */
-Route::get('post/{post:slug}', function(\App\Models\Post $post) {
-    // find a post by its slug and pass it to a view called "post"
-    return view('post', [
-        'post' => $post
-    ]);
-})->where('post', '[A-z\-]+');
+Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('homepage');
+Route::get('post/{post:slug}', [\App\Http\Controllers\PostController::class, 'detail'])
+    ->where('post', '[A-z\-]+')->name('detail');
 
 
 Route::get('posts-category/{category:slug}', function(\App\Models\Category $category) {
