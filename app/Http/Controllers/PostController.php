@@ -21,7 +21,7 @@ class PostController extends Controller
                     'category',
                     'author',
                 ])
-                ->get(),
+                ->paginate(9),
             'currentCategory' => \request('category') ? Category::firstWhere([
                 'slug' => \request('category')
             ]) : null,

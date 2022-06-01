@@ -73,9 +73,11 @@ class Post extends Model
         array $filters
     ) {
         $query
-            ->when($filters['search'] ?? false, fn(Builder $query, $search) => $query
-                ->where('title', 'like', '%' . $search . '%')
-                ->orWhere('body', 'like', '%' . $search . '%')
+            ->when($filters['search'] ?? false, fn(Builder $query, $search) =>
+                $query->where(fn(Builder $query) =>
+                    $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('body', 'like', '%' . $search . '%')
+                )
             )
             ->when($filters['category'] ?? false, fn(Builder $query, $category) => $query
                 ->whereHas('category', fn(Builder $query) =>
@@ -87,6 +89,5 @@ class Post extends Model
                     $query->where('username', $username)
                 )
             );
-        ;
     }
 }
