@@ -23,7 +23,7 @@
         let queryString = '?category=' + categorySlug;
 
         @if(request()->except('category'))
-            queryString += '&{{ http_build_query(request()->except('category')) }}';
+            queryString += '&{{ http_build_query(request()->except(['category', 'page'])) }}';
         @endif
 
         location.href = queryString;
