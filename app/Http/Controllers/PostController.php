@@ -16,7 +16,7 @@ class PostController extends Controller
         return view('posts.index', [
             'posts' =>
                 \App\Models\Post::latest('published_at')
-                ->filter(\request(['search', 'category']))
+                ->filter(\request(['search', 'category', 'author']))
                 ->with([
                     'category',
                     'author',

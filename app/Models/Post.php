@@ -81,6 +81,12 @@ class Post extends Model
                 ->whereHas('category', fn(Builder $query) =>
                     $query->where('slug', $category)
                 )
+            )
+            ->when($filters['author'] ?? false, fn(Builder $query, $username) => $query
+                ->whereHas('author', fn(Builder $query) =>
+                    $query->where('username', $username)
+                )
             );
+        ;
     }
 }

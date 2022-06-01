@@ -18,8 +18,8 @@ Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('h
 Route::get('post/{post:slug}', [\App\Http\Controllers\PostController::class, 'detail'])
     ->where('post', '[A-z\-]+')->name('detail');
 
-Route::get('posts-user/{user:username}', function(\App\Models\User $user) {
-    return view('posts', [
-        'posts' => $user->posts->load(['category', 'author'])
-    ]);
-});
+//Route::get('posts-user/{user:username}', function(\App\Models\User $user) {
+//    return view('posts.index', [
+//        'posts' => $user->posts->load(['category', 'author'])
+//    ]);
+//});
