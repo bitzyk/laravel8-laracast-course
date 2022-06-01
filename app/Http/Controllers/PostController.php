@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -15,13 +16,15 @@ class PostController extends Controller
         return view('posts', [
             'posts' =>
                 \App\Models\Post::latest('published_at')
-                ->filter(\request(['search']))
+                ->filter(\request(['search', 'category']))
                 ->with([
                     'category',
                     'author',
                 ])
                 ->get(),
-            'categories' => \App\Models\Category::all()
+            'currentCategory' => \request('category') ? Category::firstWhere([
+                'slug' => \request('category')
+            ]) : null,
         ]);
     }
 

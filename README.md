@@ -30,6 +30,10 @@ php artisan db:seed
 ```
 php artisan make:controller PostController
 ```
+- Create a new component
+```
+php artisan make:component CategoryDropdown
+```
 
 - PHP laravel plugin support generate -> https://github.com/barryvdh/laravel-ide-helper
 

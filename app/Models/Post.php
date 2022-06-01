@@ -63,13 +63,24 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * @param Builder $query
+     * @param array $filters
+     * @return void
+     */
     public function scopeFilter(
         Builder $query,
         array $filters
     ) {
-        $query->when($filters['search'] ?? false, fn(Builder $query, $search) => $query
-            ->where('title', 'like', '%' . $search . '%')
-            ->orWhere('body', 'like', '%' . $search . '%')
-        );
+        $query
+            ->when($filters['search'] ?? false, fn(Builder $query, $search) => $query
+                ->where('title', 'like', '%' . $search . '%')
+                ->orWhere('body', 'like', '%' . $search . '%')
+            )
+            ->when($filters['category'] ?? false, fn(Builder $query, $category) => $query
+                ->whereHas('category', fn(Builder $query) =>
+                    $query->where('slug', $category)
+                )
+            );
     }
 }

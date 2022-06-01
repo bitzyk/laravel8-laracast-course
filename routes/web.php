@@ -14,21 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('homepage');
+
 Route::get('post/{post:slug}', [\App\Http\Controllers\PostController::class, 'detail'])
     ->where('post', '[A-z\-]+')->name('detail');
 
-
-Route::get('posts-category/{category:slug}', function(\App\Models\Category $category) {
-    return view('posts', [
-        'posts' => $category->posts->load(['category', 'author']),
-        'categories' => \App\Models\Category::all(),
-        'currentCategory' => $category,
-    ]);
-})->where('category:slug', '[A-z\-]+');
-
 Route::get('posts-user/{user:username}', function(\App\Models\User $user) {
     return view('posts', [
-        'posts' => $user->posts->load(['category', 'author']),
-        'categories' => \App\Models\Category::all(),
+        'posts' => $user->posts->load(['category', 'author'])
     ]);
 });
