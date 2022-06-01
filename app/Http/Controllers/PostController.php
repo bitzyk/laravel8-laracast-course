@@ -13,7 +13,7 @@ class PostController extends Controller
 //            logger($query->sql);
 //        });
 
-        return view('posts', [
+        return view('posts.index', [
             'posts' =>
                 \App\Models\Post::latest('published_at')
                 ->filter(\request(['search', 'category']))
@@ -34,7 +34,7 @@ class PostController extends Controller
     public function detail(\App\Models\Post $post)
     {
         // find a post by its slug and pass it to a view called "post"
-        return view('post', [
+        return view('posts.detail', [
             'post' => $post
         ]);
     }
