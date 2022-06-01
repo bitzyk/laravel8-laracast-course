@@ -27,7 +27,7 @@
                 {!! $post->excerpt !!}
             </div>
 
-            <x-user-breadcrumb :author="$post->author"></x-user-breadcrumb>
+            <x-author-breadcrumb :author="$post->author"></x-author-breadcrumb>
         </div>
     </div>
 </article>

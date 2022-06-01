@@ -7,7 +7,7 @@
     </div>
 
     <div class="hidden lg:block">
-        <a href="?author={{ $author->username }}"
+        <a href="?author={{ $author->username }}&{{ http_build_query(request()->except('author')) }}"
            class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8"
         >Read More</a>
     </div>

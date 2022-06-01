@@ -20,6 +20,12 @@
             return;
         }
 
-        location.href = '?category=' + categorySlug;
+        let queryString = '?category=' + categorySlug;
+
+        @if(request()->except('category'))
+            queryString += '&{{ http_build_query(request()->except('category')) }}';
+        @endif
+
+        location.href = queryString;
     }
 </script>
