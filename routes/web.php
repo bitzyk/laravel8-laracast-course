@@ -16,13 +16,28 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('homepage');
 
 Route::get('post/{post:slug}', [\App\Http\Controllers\PostController::class, 'detail'])
-    ->where('post', '[A-z\-]+')->name('detail');
+    ->where('post', '[A-z\-]+')
+    ->name('detail');
 
 Route::get('register', [\App\Http\Controllers\RegisterController::class, 'create'])
-    ->where('post', '[A-z\-]+')->name('detail');
+    ->name('register-get')
+    ->middleware('guest');
 
 Route::post('register', [\App\Http\Controllers\RegisterController::class, 'store'])
-    ->where('post', '[A-z\-]+')->name('detail');
+    ->name('register-post')
+    ->middleware('guest');
+
+Route::post('logout', [\App\Http\Controllers\SessionController::class, 'logout'])
+    ->name('logout')
+    ->middleware('auth');
+
+Route::get('login', [\App\Http\Controllers\SessionController::class, 'loginForm'])
+    ->name('login-get')
+    ->middleware('guest');
+
+Route::post('login', [\App\Http\Controllers\SessionController::class, 'login'])
+    ->name('login-post')
+    ->middleware('guest');
 
 
 //Route::get('posts-user/{user:username}', function(\App\Models\User $user) {
